@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{message}}</h1>
+        <h1>{{url}}</h1>
+         <!-- v-once：该指令表示元素和组件只渲染一次，不会随数据改变而改变 -->
+         <h2 v-once>{{message}}</h2>
+         <!-- v-html：该指令能解析HTML -->
+         <h2 v-html="url"></h2>
+         <!-- v-cloak：该指令可以防止页面闪动 -->
+         <h2 v-cloak>{{message}}</h2>
+
+         <!-- v-bind:：该指令可以动态绑定属性，简写为: -->
+         <img v-bind:src="imgUrl" alt="">
+         <a :href="jdurl">jd</a>
+        
+    </div>
+   
+
+    <script src="./js/vue.js"></script>
+    <script>
+        let app = new Vue({
+            el: '#app',
+            data: {
+                message: 'hello vue',
+                url:'<a href="http://www.baidu.com">baidu</a>',
+                imgUrl:'https://gimg3.baidu.com/search/src=http%3A%2F%2Fpics2.baidu.com%2Ffeed%2Fd01373f082025aafe1106f80ba52ed6e024f1aa7.jpeg%3Ftoken%3D015d159394f9fc5e3a1d3fb722b1b7e0&refer=http%3A%2F%2Fwww.baidu.com&app=2021&size=f360,240&n=0&g=0n&q=75&fmt=auto?sec=1651683600&t=0e801714aa457f069aa71fc7a4f498ca',
+                jdurl:'http://www.jd.com'     
+            },
+        })
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <div>totalPrice:{{tatolPrice}}</div>
+        <div>totalPrice:{{tatolPrice}}</div>
+        <div>totalPrice:{{tatolPrice}}</div>
+        <!-- 计算属性有缓存机制 -->
+        <div>{{fullName}}</div>
+    </div>
+    <script src="./js/vue.js"></script>
+    <script>
+        let app = new Vue({
+            el: '#app',
+            data:{
+                books:[
+                    {name:'代码大全',price:112},
+                    {name:'现代操作系统',price:115},
+                    {name:'深入了解计算机原理',price:118},
+                    {name:'Unix编程艺术',price:116},
+                ],
+                firstName: 'bryant',
+                lastName: 'kobe'
+            },
+            computed:{
+                tatolPrice: function(){
+                    console.log('totalprice');
+                    return this.books.reduce((pre,cur)=>{
+                        return pre + cur.price
+                    },0)
+                },
+                //计算属性的完整写法（get set 属性）
+                fullName: {
+                    set:function(newVal){
+                        console.log(newVal);
+                        let newName = newVal.split(' ')
+                        this.firstName = newName[1]
+                        this.lastName = newName[0]
+                    },
+                    get:function(val){
+                        console.log(val);
+                        return this.firstName + ' '  + this.lastName
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>
