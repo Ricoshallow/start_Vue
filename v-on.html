@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- 事件调用的方法没有参数 -->
+        <button @click="click1">1</button>
+        <!-- 定义事件需要一个参数，而调用时没有传入参数，浏览器默认传入event -->
+        <button @click="click2">2</button>
+        <!-- 定义事件需要传入event以及其他其他参数,需要在调用时传入$event -->
+        <button @click="click3(6,$event)">3</button>
+
+        <!-- v-on 修饰符 -->
+        <!-- 阻止冒泡 -->
+        <button @click.stop="dosomething"></button>
+        <!-- 阻止默认行为 -->
+        <form @submit.prevent="dosomething" action=""></form>
+        <!-- 键修饰符.键别名 -->
+        <input @keyup.enter="dosomething" type="text">
+        <!-- 键修饰符.键代码 -->
+        <input @keyup.13="dosomething" type="text">
+        <!-- 事件只触发一次 -->
+        <button @click.once="dosomething"></button>
+    </div>
+    <script src="./js/vue.js"></script>
+    <script>
+        let app = new Vue({
+            el: '#app',
+            data:{
+                fruit:['apple','banana','mole','peach']
+            },
+            methods: {
+                click1(){
+                    console.log('click button 1');
+                },
+                click2(e){
+                    console.log(e);
+                },
+                click3(s, event){
+                    console.log(s, event)
+                }
+            }
+        })
+    </script>
+</body>
+</html>

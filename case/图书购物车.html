@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <div v-if="books.length!==0" id="car">
+            <table border="1">
+                <tr>
+                    <th></th>
+                    <th>书籍名称</th>
+                    <th>出版日期</th>
+                    <th>价格</th>
+                    <th>购买数量</th>
+                    <th>操作</th>
+                </tr>
+                
+                <tr  v-for="(item,index) in books">
+                    <th>{{index+1}}</th>
+                    <th>{{item.name}}</th>
+                    <th>{{item.date}}</th>
+                    <th>{{item.price | showprice}}</th>
+                    <th><button @click="sub(index)" :disabled="item.num <=0">-</button> {{item.num}} <button @click="add(index)">+</button></th>
+                    <th><button @click="del(index)">移除</button></th>
+                </tr>
+            </table>
+            <div id="total">总价：{{total | showprice}}</div>
+        </div>
+        <div v-else>购物车为空</div>
+    </div>
+    <script src="../js/vue.js"></script>
+    <script>
+        let app = new Vue({
+            el: '#app',
+            data: {
+                books: [
+                    {name:'代码大全',date:'2011-1',price:112,num:0},
+                    {name:'现代操作系统',date:'2013-6',price:98,num:0},
+                    {name:'深入了解计算机原理',date:'2012-5',price:66,num:0},
+                    {name:'Unix编程艺术',date:'2017-4',price:72,num:0},
+                ],
+                isNone: false
+
+            },
+            computed:{
+                total(){
+                    return this.books.reduce((pre,cur)=>{
+                        return pre + cur.price*cur.num
+                    },0)
+                }
+            },
+            methods:{
+                sub(index){
+                    // if(this.books[index].num===0){return}
+                    this.books[index].num--
+                },
+                add(index){
+                    this.books[index].num++
+                },
+                del(index){
+                    this.books.splice(index,1)
+                }
+            },
+            //vue过滤器
+            filters:{
+                showprice(price){
+                    return '￥' + price.toFixed(2)
+                }
+            }
+        })
+    </script>
+
+</body>
+</html>
