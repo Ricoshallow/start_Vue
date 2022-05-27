@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        {{message}}
+        <cpn></cpn>
+        <!-- 这里不能用驼峰名作为标签名,只能用短横线形式 -->
+        <seperate-cpn></seperate-cpn>
+    </div>
+
+    <template id="seperateCpn">
+        <div>
+            <h2>welcome</h2>
+            <h2>首页:{{name}}</h2>
+        </div>
+    </template>
+    <script src="./js/vue.js"></script>
+    <script>
+        // 1.创建组件构造器对象
+        // const myFirstCpn = Vue.extend({
+        //     template: `<h2>First component</h2>`
+        // })
+        // 2.注册组件(全局组件)
+        // Vue.component('cpn',myFirstCpn)
+
+        // 组件注册语法糖(全局)
+        // Vue.component('cpn',{
+        //     template: `<h2>First component</h2>`
+        // })
+        let app = new Vue({
+            el: '#app',
+            data: {message: 'hello vue'},
+            //注册组件(局部组件)
+            // components:{
+            //     cpn:myFirstCpn
+            // }
+
+            // 注册组件语法糖(局部组件)
+            components: {
+                'cpn':{
+                    template: `<h2>First component</h2>`
+                },
+                'seperateCpn':{
+                    template:'#seperateCpn',
+                    data(){
+                        return {
+                            name: 'component'
+                        }
+                    }
+                }
+            }
+        })
+    </script>
+
+</body>
+</html>
